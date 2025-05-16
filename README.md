@@ -205,6 +205,11 @@ Get it from here: **[AdminKit](https://adminkit.io/)**
 - GitHub: [shawonk007](https://github.com/shawonk007)
 - Contributions: Database Design & Management.
 
+##### Hamza Saleem
+- GitHub: [HamzaSaleem56](https://github.com/HamzaSaleem56)
+- Contributions: Remove code errors 
+
+
 
 ## Want to Contribute?
 We welcome contributions from the community! If you'd like to contribute to the Employee Management System project, please follow these steps:
