@@ -34,7 +34,7 @@ class RoleController extends Controller
     {
         //
         Role::create($request->all());
-        return back()->with('success', 'Role crated successfully');
+        return back()->with('success', 'Role Created Successfully!');
     }
 
     /**
@@ -61,7 +61,7 @@ class RoleController extends Controller
     {
         //
         $role->update($request->all());
-        return back()->with('success', 'Role updated successfully');
+        return back()->with('success', 'Role Updated Successfully!');
     }
 
     /**
@@ -71,6 +71,6 @@ class RoleController extends Controller
     {
         //
         $role->delete();
-        return back()->with('success', 'Role deleted successfully');
+        return back()->with('success', 'Role Deleted Successfully!');
     }
 }

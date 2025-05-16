@@ -32,13 +32,21 @@ class AttendanceController extends Controller {
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAttendanceRequest $request)
+    /*public function store(StoreAttendanceRequest $request)
     {
         //
         Attendance::create($request->all());
-        return back()->with('success', 'user crated successfully');
+        return back()->with('success', 'User Created Successfully!');
        
-    }
+    }*/
+
+    public function store(StoreAttendanceRequest $request)
+{
+    $data = $request->all();
+    $data['attendance_date'] = now(); // Automatically set the current datetime
+    Attendance::create($data);
+    return back()->with('success', 'Attendance Recorded Successfully!');
+}
 
     /**
      * Display the specified resource.
@@ -66,7 +74,7 @@ class AttendanceController extends Controller {
     {
         //
         $attendance->update($request->all());
-        return back()->with('success', 'user updated successfully');
+        return back()->with('success', 'User Updated Successfully!');
     }
 
     /**

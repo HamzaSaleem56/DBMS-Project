@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    {{ __('Edit user') }}
+    {{ __('Edit Schedule') }} <!-- Updated title -->
 @endsection
 
 @section('header')
@@ -12,7 +12,8 @@
   <section class="row">
     <div class="col-12 d-flex align-items-center justify-content-center">
       <div class="col-6">
-        <form action="{{  Auth::user()->role->slug === 'super-admin' ? route('schedule.update', $schedul->id) : ( Auth::user()->role->slug === 'administrator' ? route('admin.schedule.update', $schedule->id) : route('moderator.schedule.update', $schedule->id) )  }}" method="post">
+        <!-- Corrected $schedul to $schedule -->
+        <form action="{{ Auth::user()->role->slug === 'super-admin' ? route('schedule.update', $schedule->id) : ( Auth::user()->role->slug === 'administrator' ? route('admin.schedule.update', $schedule->id) : route('moderator.schedule.update', $schedule->id) ) }}" method="post">
           @csrf
           @method('put')
           <div class="card flex-fill">
@@ -22,27 +23,27 @@
             <div class="card-body py-0">
               <div class="row g-3">
                 <div class="col-12">
-                  <input type="text" name="title" class="form-control" id="title" placeholder="{{ __('title') }}" value="{{ $schedule->title }}" required />
+                  <input type="text" name="title" class="form-control" id="title" placeholder="{{ __('Title') }}" value="{{ $schedule->title }}" required />
                 </div>
                 <div class="col-12">
-                    <input type="time" name="time_in" class="form-control" id="title" placeholder="{{ __('time_in') }}" value="{{ $schedule->time_in }}" required />
+                  <input type="time" name="time_in" class="form-control" id="time_in" placeholder="{{ __('Time In') }}" value="{{ $schedule->time_in }}" required /> <!-- Unique ID -->
                 </div>
                 <div class="col-12">
-                    <input type="time" name="time_out" class="form-control" id="title" placeholder="{{ __('time_out') }}" value="{{ $schedule->time_out }}" required />
+                  <input type="time" name="time_out" class="form-control" id="time_out" placeholder="{{ __('Time Out') }}" value="{{ $schedule->time_out }}" required /> <!-- Unique ID -->
                 </div>
-                  
               </div>
             </div>
             <div class="card-footer">
               <div class="row">
                 <div class="col-6 d-grid">
-                  <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('schedule.index', $schedule->id) : (Auth::user()->role->slug === 'administrator' ? route('admin.schedule.index', $schedule->id) : route('moderator.schedule.index', $schedule->id) ) }}" class="btn btn-outline-secondary" >
+                  <!-- Removed $schedule->id from index routes -->
+                  <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('schedule.index') : (Auth::user()->role->slug === 'administrator' ? route('admin.schedule.index') : route('moderator.schedule.index') ) }}" class="btn btn-outline-secondary">
                     <i class="align-middle me-1" data-feather="arrow-left"></i>
                     <span class="ps-1">{{ __('Discard') }}</span>
                   </a>
                 </div>
                 <div class="col-6 d-grid">
-                  <button type="submit" class="btn btn-outline-secondary" >
+                  <button type="submit" class="btn btn-outline-secondary">
                     <i class="align-middle me-1" data-feather="check"></i>
                     <span class="ps-1">{{ __('Update') }}</span>
                   </button>
@@ -52,13 +53,9 @@
           </div>
         </form>
       </div>
-      {{-- <div class="col-5">
-        @include('partials.error')
-      </div> --}}
     </div>
   </section>
 @endsection
 
 @section('script')
-    
 @endsection

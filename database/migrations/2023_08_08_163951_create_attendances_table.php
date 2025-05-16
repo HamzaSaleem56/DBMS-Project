@@ -12,14 +12,33 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('attendances', function (Blueprint $table) {
+            // Primary key
             $table->id();
-            $table->bigInteger("employee_id")->unsigned();
-            $table->foreign('employee_id')->references('id')->on('employees')->onDelete("cascade");
-            $table->boolean('state')->default(0);
-            $table->time('attendance_time')->default(date("H:i:s"));
+
+            // FK to employees.id (unsignedBigInteger matches the default id type)
+            $table->unsignedBigInteger('employee_id');
+            $table->foreign('employee_id')
+                  ->references('id')
+                  ->on('employees')
+                  ->onDelete('cascade');
+
+            // Attendance date (non-nullable by default)
             $table->date('attendance_date');
-            $table->boolean('type')->unsigned()->default(0);
-            $table->tinyInteger('status')->nullable();
+
+            // Present/absent flag (boolean defaults to false)
+            $table->boolean('state')->default(false);
+
+            // Time of attendance, defaulting to the current DB time
+            $table->time('attendance_time')
+                  ->default(DB::raw('CURRENT_TIME'));
+
+            // In/Out marker as boolean (0/1)
+            $table->boolean('type')->default(false);
+
+            // Status code (tiny integer, non-nullable)
+            $table->unsignedTinyInteger('status');
+
+            // Laravel’s created_at / updated_at
             $table->timestamps();
         });
     }

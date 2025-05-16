@@ -25,7 +25,7 @@
         <table class="table data-table">
           <thead>
             <tr>
-              <th>SL</th>
+              <th>S#</th>
               <th>Name of Employee</th>
               <th>Department</th>
               <th>Schedule</th>

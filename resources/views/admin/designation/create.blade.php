@@ -5,18 +5,19 @@
 @endsection
 
 @section('header')
-  <h1 class="h3 mb-3">Create Department</h1>
+  <h1 class="h3 mb-3">Create Designation</h1> <!-- Updated header -->
 @endsection
 
 @section('content')
   <section class="row">
     <div class="col-12 d-flex align-items-center justify-content-center">
       <div class="col-6">
-        <form action="{{ Auth::user()->role->slug === 'super-admin' ? route('desgination.store') : (Auth::user()->role->slug === 'administrator' ? route('admin.desgination.store') : route('hr.desgination.store') ) }}" method="post">
+        <!-- Corrected route names: 'designation.store' -->
+        <form action="{{ Auth::user()->role->slug === 'super-admin' ? route('designation.store') : (Auth::user()->role->slug === 'administrator' ? route('admin.designation.store') : route('hr.designation.store') ) }}" method="post">
           @csrf
           <div class="card flex-fill">
             <div class="card-header">
-              <h5 class="card-title mb-0">{{ __('Create New Desgination') }}</h5>
+              <h5 class="card-title mb-0">{{ __('Create New Designation') }}</h5> <!-- Fixed typo -->
             </div>
             <div class="card-body">
               <div class="row g-3">
@@ -30,7 +31,7 @@
                 </div>
                 <div class="col-12">
                   <label for="status">Status</label>
-                  <select name="status" class="form-control" id="status">
+                  <select name="status" class="form-control" id="status" required> <!-- Added 'required' -->
                     <option value="">{{ __('-- Choose One --') }}</option>
                     <option value="1">{{ __('Enable') }}</option>
                     <option value="0">{{ __('Disable') }}</option>
@@ -41,7 +42,8 @@
             <div class="card-footer">
               <div class="row g-3">
                 <div class="col-6 d-grid">
-                  <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('designation.index', $designation->id) : (Auth::user()->role->slug === 'administrator' ? route('admin.designation.index', $designation->id) : route('hr.designation.index', $designation->id) ) }}" class="btn btn-outline-secondary">
+                  <!-- Removed $designation->id parameter -->
+                  <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('designation.index') : (Auth::user()->role->slug === 'administrator' ? route('admin.designation.index') : route('hr.designation.index') ) }}" class="btn btn-outline-secondary">
                     <i class="fas fa-arrow-left"></i>
                     <span class="ps-1">{{ __('Discard') }}</span>
                   </a>
@@ -57,9 +59,6 @@
           </div>
         </form>
       </div>
-      {{-- <div class="col-5">
-        @include('partials.error')
-      </div> --}}
     </div>
   </section>
 @endsection

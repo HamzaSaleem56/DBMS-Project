@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
 @section('title')
-    {{ __('Add New user') }}
+    {{ __('Create Attendance') }} <!-- Updated title -->
 @endsection
 
 @section('header')
-  <h1 class="h3 mb-3">Daily Attendance</h1>
+  <h1 class="h3 mb-3">Create Attendance</h1> <!-- Updated header -->
 @endsection
 
 @section('content')
@@ -21,7 +21,8 @@
             <div class="card-body py-0">
               <div class="row g-3">
                 <div class="col-12">
-                  <input type="date" name="date" class="form-control" id="title" placeholder="{{ __('Date') }}" value="{{ old('date') }}" required />
+                  <!--<input type="date" name="date" class="form-control" id="date" placeholder="{{ __('Date') }}" value="{{ old('date') }}" required /> Fixed id -->
+                  <input type="date" name="attendance_date" class="form-control" required>
                 </div>
                 <div class="col-12">
                   <select name="employee_id" class="form-control" id="role">
@@ -33,13 +34,13 @@
                   </select>
                 </div>
                 <div class="col-4">
-                  <input type="time" name="checkin_time" class="form-control" id="slug" placeholder="{{ __('Checkin_time') }}" value="{{ old('checkin_time') }}" />
+                  <input type="time" name="checkin_time" class="form-control" id="checkin_time" placeholder="{{ __('Checkin_time') }}" value="{{ old('checkin_time') }}" />
                 </div>  
                 <div class="col-4">
-                  <input type="time" name="checkout_time" class="form-control" id="slug" placeholder="{{ __('Checkout_time') }}" value="{{ old('checkout_time') }}" />
+                  <input type="time" name="checkout_time" class="form-control" id="checkout_time" placeholder="{{ __('Checkout_time') }}" value="{{ old('checkout_time') }}" />
                 </div>
                 <div class="col-4">
-                  <select name="status" class="form-control" id="status">
+                  <select name="status" class="form-control" id="status" required> <!-- Added required -->
                     <option value="">{{ __('-- Status --') }}</option>
                     <option value="1">{{ __('Present') }}</option>
                     <option value="0">{{ __('Absent') }}</option>
@@ -50,13 +51,14 @@
             <div class="card-footer">
               <div class="row">
                 <div class="col-6 d-grid">
-                  <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('attendance.index', $attendance->id) : (Auth::user()->role->slug === 'administrator' ? route('admin.attendance.index', $attendance->id) : route('moderator.attendance.index', $attendance->id) ) }}" class="btn btn-outline-secondary" >
+                  <!-- Removed $attendance->id parameter -->
+                  <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('attendance.index') : (Auth::user()->role->slug === 'administrator' ? route('admin.attendance.index') : route('moderator.attendance.index') ) }}" class="btn btn-outline-secondary">
                     <i class="align-middle me-1" data-feather="arrow-left"></i>
                     <span class="ps-1">{{ __('Discard') }}</span>
                   </a>
                 </div>
                 <div class="col-6 d-grid">
-                  <button type="submit" class="btn btn-outline-secondary" >
+                  <button type="submit" class="btn btn-outline-secondary">
                     <i class="align-middle me-1" data-feather="plus"></i>
                     <span class="ps-1">{{ __('Create New') }}</span>
                   </button>
@@ -67,9 +69,6 @@
         </form>
       </div>
     </div>
-    {{-- <div class="col-5">
-      @include('partials.error')
-    </div> --}}
   </section>
 @endsection
 

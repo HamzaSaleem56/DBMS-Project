@@ -36,7 +36,7 @@ class ScheduleController extends Controller
     {
         //
         Schedule::create($request->all());
-        return back()->with('success', 'user crated successfully');
+        return back()->with('success', 'User Created Successfully!');
     }
 
     /**
@@ -64,7 +64,7 @@ class ScheduleController extends Controller
     {
         //
         $schedule->update($request->all());
-        return back()->with('success', 'user updated successfully');
+        return back()->with('success', 'Schedule Updated Successfully!');
     }
 
     /**
